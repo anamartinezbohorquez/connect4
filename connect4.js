@@ -1,4 +1,6 @@
-let tablero;
+
+
+  let tablero;
   let caer;
   let ficha;
   let turno = 1;
