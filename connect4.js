@@ -1,5 +1,4 @@
 
-
   let tablero;
   let caer;
   let ficha;
