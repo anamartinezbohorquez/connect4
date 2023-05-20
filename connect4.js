@@ -1,14 +1,14 @@
-// quadrille object declaration
-// Quadrille.CELL_LENGTH is a constant defining the quadrille
-  // cell length default is: 100
-  let tablero;
+let tablero;
   let caer;
   let ficha;
   let turno = 1;
   let tileDisplay;// (all) quadrille cell contours
   let colorDisplay;// quadrille color cell
+  let synth ;
 
   function setup() {
+    //Configuraciones de las piezas "Objeto literal"
+    synth = new Tone.Synth().toDestination();
     //Configuraciones de las piezas "Objeto literal"
     ficha = {position:{x:0,y:0}, pieza:color('red')}
     frameRate(60)
@@ -84,102 +84,100 @@
         tablero.fill(fil,columna,ficha.pieza)
         ficha.position.y=fil
         if(fil>0){
-          tablero.clear(fil-1,columna)
+          tablero.clear(fil-1,columna);
         }
       }
     }
   }
   function siguiente(turno){
     if (turno%2 === 0){
-      ficha.pieza = color('red')
+      ficha.pieza = color('red');
+      synth.triggerAttackRelease("C4", "8n");
     }else{
       ficha.pieza = color('yellow')
+      synth.triggerAttackRelease("G4", "8n");
     }
   }
-  function ganador(){
+
+
+
+
+
+
+
+function mArray(a1,a2){
+for (let i = 0; i < a1.length; i++) {
+    if(a1[i]!=a2[i])
+        return false
+}
+    return true
+
+}
+
+
+ function ganador(){
 
   fila=ficha.position.y
   colum=ficha.position.x
 
-  tipo=tablero.read(fila,colum).levels[1]
-  console.log(tablero.read(fila,colum+1)==null)
+  tipo=tablero.read(fila,colum).levels
+  console.log(tablero.read(fila,colum).levels)
 
 
 
-  l=0
+  let l1=0,l2=0,l3=0,l4=0
   for(i=1;i<4;i++){
 
    if(tablero.read(fila+i,colum)!=null)
-    if(tablero.read(fila+i,colum).levels[1]==tipo){
-      l+=1
+     if(mArray(tablero.read(fila+i,colum).levels,tipo))
+      l1+=1
 
-    }
+
     if(tablero.read(fila-i,colum)!=null)
-    if(tablero.read(fila-i,colum).levels[1]==tipo){
-      l+=1
-    }
+      if(mArray(tablero.read(fila-i,colum).levels,tipo))
+      l1+=1
 
 
-    if(l>2)
-       console.log("ganador")
+    if(tablero.read(fila,colum+i)!=null)
+     if(mArray(tablero.read(fila,colum+i).levels,tipo))
+       l2+=1
 
-     }
-  l=0
-
-  for(i=1;i<4;i++){
-
-  if(tablero.read(fila,colum+i)!=null)
-  if(tablero.read(fila,colum+i).levels[1]==tipo){
-
-
-    l+=1
-    }
     if(tablero.read(fila,colum-i)!=null)
-    if(tablero.read(fila,colum-i).levels[1]==tipo){
-
-      l+=1
-
-    }
+    if(mArray(tablero.read(fila,colum-i).levels,tipo))
+      l2+=1
 
 
-    if(l>2)
-      console.log("ganador")
-
-     }
-
-   l=0
-  for(i=1;i<4;i++){
 
  if(tablero.read(fila+i,colum+i)!=null)
-  if(tablero.read(fila+i,colum+i).levels[1]==tipo){
-      l+=1
-    }
+  if(mArray(tablero.read(fila+i,colum+i).levels,tipo))
+      l3+=1
+
     if(tablero.read(fila-i,colum-i)!=null)
-    if(tablero.read(fila-i,colum-i).levels[1]==tipo){
-      l+=1
-    }
-    if(l>2)
-      console.log("ganador")
-
-     }
+    if(mArray(tablero.read(fila-i,colum-i).levels,tipo))
+      l3+=1
 
 
-  l=0
-for(i=1;i<4;i++){
+  if(tablero.read(fila+i,colum-i)!=null)
+    if(mArray(tablero.read(fila+i,colum-i).levels,tipo))
+      l4+=1
 
-    if(tablero.read(fila+i,colum-i)!=null)
-    if(tablero.read(fila+i,colum-i).levels[1]==tipo){
-      l+=1
-    }
   if(tablero.read(fila-i,colum+i)!=null)
-    if(tablero.read(fila-i,colum+i).levels[1]==tipo){
-      l+=1
-    }
+    if(mArray(tablero.read(fila-i,colum+i).levels,tipo))
+      l4+=1
 
-    if(l>2)
+
+
+
+
+    if(l1>2 || l2>2 || l3>2 || l4>2)
       console.log("ganador")
 
 
-}
+  }
 
-}
+
+
+
+
+
+ }
