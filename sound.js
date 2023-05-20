@@ -15,8 +15,10 @@ var index = 0;
 
 
 Tone.Transport.scheduleRepeat(time => {
-    REPEAT(time);
+    repeat(time);
 }, '8n');
+
+// Tone.Transport.bpm.value = 90;
 
 function repeat(time){
     let note = notes[index % notes.length];
@@ -28,9 +30,6 @@ Tone.Transport.start();
 
 setTimeout(() => {
     Tone.Transport.stop();
-}, 5000);
-
-
-
+}, 5000)
 
 
