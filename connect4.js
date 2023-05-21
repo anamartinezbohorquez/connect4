@@ -22,6 +22,14 @@ let tablero;
       ellipse(0, 0, cellLength, cellLength);
     }
 
+    // Start the melody playback
+  Tone.Transport.scheduleRepeat((time) => {
+    playMelody(time);
+  }, '8n');
+
+  // Start the Tone.js Transport
+  Tone.Transport.start();
+
     caer = createQuadrille(7,1);
     tablero = createQuadrille(7, 6);
   }
@@ -101,10 +109,6 @@ let tablero;
 
 
 
-
-
-
-
 function mArray(a1,a2){
 for (let i = 0; i < a1.length; i++) {
     if(a1[i]!=a2[i])
@@ -159,4 +163,13 @@ function ganador() {
       break;
     }
   }
+}
+
+const notes = ['C4', 'E4', 'G4', 'C5', 'E5', 'G5'];
+let index = 0;
+
+function playMelody(time) {
+  let note = notes[index % notes.length];
+  synth.triggerAttackRelease(note, '8n', time);
+  index++;
 }
