@@ -78,7 +78,7 @@ let tablero;
     }
   }
   function dro(){
-    columna = ficha.position.x
+    let columna = ficha.position.x
     for(let fil = 0;fil <6;fil++){
       if(tablero.isEmpty(fil,columna)){
         tablero.fill(fil,columna,ficha.pieza)
