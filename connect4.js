@@ -115,69 +115,48 @@ for (let i = 0; i < a1.length; i++) {
 }
 
 
- function ganador(){
+function ganador() {
+  fila = ficha.position.y;
+  colum = ficha.position.x;
 
-  fila=ficha.position.y
-  colum=ficha.position.x
+  tipo = tablero.read(fila, colum).levels;
+  console.log(tablero.read(fila, colum).levels);
 
-  tipo=tablero.read(fila,colum).levels
-  console.log(tablero.read(fila,colum).levels)
+  let l1 = 0,
+    l2 = 0,
+    l3 = 0,
+    l4 = 0;
+  for (i = 1; i < 4; i++) {
+    if (tablero.read(fila + i, colum) != null)
+      if (mArray(tablero.read(fila + i, colum).levels, tipo)) l1 += 1;
 
+    if (tablero.read(fila - i, colum) != null)
+      if (mArray(tablero.read(fila - i, colum).levels, tipo)) l1 += 1;
 
+    if (tablero.read(fila, colum + i) != null)
+      if (mArray(tablero.read(fila, colum + i).levels, tipo)) l2 += 1;
 
-  let l1=0,l2=0,l3=0,l4=0
-  for(i=1;i<4;i++){
+    if (tablero.read(fila, colum - i) != null)
+      if (mArray(tablero.read(fila, colum - i).levels, tipo)) l2 += 1;
 
-   if(tablero.read(fila+i,colum)!=null)
-     if(mArray(tablero.read(fila+i,colum).levels,tipo))
-      l1+=1
+    if (tablero.read(fila + i, colum + i) != null)
+      if (mArray(tablero.read(fila + i, colum + i).levels, tipo)) l3 += 1;
 
+    if (tablero.read(fila - i, colum - i) != null)
+      if (mArray(tablero.read(fila - i, colum - i).levels, tipo)) l3 += 1;
 
-    if(tablero.read(fila-i,colum)!=null)
-      if(mArray(tablero.read(fila-i,colum).levels,tipo))
-      l1+=1
+    if (tablero.read(fila + i, colum - i) != null)
+      if (mArray(tablero.read(fila + i, colum - i).levels, tipo)) l4 += 1;
 
+    if (tablero.read(fila - i, colum + i) != null)
+      if (mArray(tablero.read(fila - i, colum + i).levels, tipo)) l4 += 1;
 
-    if(tablero.read(fila,colum+i)!=null)
-     if(mArray(tablero.read(fila,colum+i).levels,tipo))
-       l2+=1
-
-    if(tablero.read(fila,colum-i)!=null)
-    if(mArray(tablero.read(fila,colum-i).levels,tipo))
-      l2+=1
-
-
-
- if(tablero.read(fila+i,colum+i)!=null)
-  if(mArray(tablero.read(fila+i,colum+i).levels,tipo))
-      l3+=1
-
-    if(tablero.read(fila-i,colum-i)!=null)
-    if(mArray(tablero.read(fila-i,colum-i).levels,tipo))
-      l3+=1
-
-
-  if(tablero.read(fila+i,colum-i)!=null)
-    if(mArray(tablero.read(fila+i,colum-i).levels,tipo))
-      l4+=1
-
-  if(tablero.read(fila-i,colum+i)!=null)
-    if(mArray(tablero.read(fila-i,colum+i).levels,tipo))
-      l4+=1
-
-
-
-
-
-    if(l1>2 || l2>2 || l3>2 || l4>2)
-      console.log("ganador")
-
-
+    if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
+      // Player wins
+      const playerColor = ficha.pieza === color('red') ? 'ROJO' : 'AMARILLO';
+      window.alert(`El jugador ${playerColor} gana!`);
+      tablero = createQuadrille(7, 6);
+      break;
+    }
   }
-
-
-
-
-
-
- }
+}
