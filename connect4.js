@@ -73,10 +73,11 @@ let tablero;
         dro()
         siguiente(turno)
         turno+=1
-        ganador()
-      }
+        setTimeout(ganador,50)
+
     }
   }
+}
   function controlador(){
     if(ficha.position.x < 0){
       ficha.position.x = 0
@@ -89,8 +90,8 @@ let tablero;
     let columna = ficha.position.x
     for(let fil = 0;fil <6;fil++){
       if(tablero.isEmpty(fil,columna)){
-        tablero.fill(fil,columna,ficha.pieza)
         ficha.position.y=fil
+        tablero.fill(fil,columna,ficha.pieza)
         if(fil>0){
           tablero.clear(fil-1,columna);
         }
@@ -122,10 +123,7 @@ for (let i = 0; i < a1.length; i++) {
 function ganador() {
   fila = ficha.position.y;
   colum = ficha.position.x;
-
-  tipo = tablero.read(fila, colum).levels;
-  console.log(tablero.read(fila, colum).levels);
-
+  tipo = tablero.read(fila, colum).levels;  
   let l1 = 0,
     l2 = 0,
     l3 = 0,
@@ -157,13 +155,12 @@ function ganador() {
 
     if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
       // Player wins
-      
       if (turno%2 === 0){
         window.alert(`El jugador ${'ROJO'} gana!`);
       }else{
         window.alert(`El jugador ${'AMARILLO'} gana!`);
       }
-      tablero = createQuadrille(7, 6);
+      tablero = createQuadrille(7,6);
       break;
     }
   }
