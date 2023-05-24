@@ -165,7 +165,7 @@ function ganador() {
   }
 }
 
-const notes = ['C4', 'E4', 'G4', 'C5', 'E5', 'G5'];
+const notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
 let index = 0;
 
 function playMelody(time) {
