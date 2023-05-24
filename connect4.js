@@ -157,8 +157,12 @@ function ganador() {
 
     if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
       // Player wins
-      const playerColor = ficha.pieza === color('red') ? 'ROJO' : 'AMARILLO';
-      window.alert(`El jugador ${playerColor} gana!`);
+      
+      if (turno%2 === 0){
+        window.alert(`El jugador ${'ROJO'} gana!`);
+      }else{
+        window.alert(`El jugador ${'AMARILLO'} gana!`);
+      }
       tablero = createQuadrille(7, 6);
       break;
     }
