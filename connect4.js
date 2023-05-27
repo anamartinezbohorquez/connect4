@@ -15,9 +15,7 @@ let tablero;
 }
 
 
-  function setup() {
-    //Configuraciones de las piezas "Objeto literal"
-    synth = new Tone.Synth().toDestination();
+   function setup() {
     //Configuraciones de las piezas "Objeto literal"
     ficha = {position:{x:0,y:0},
              pieza:color('red'),
@@ -29,18 +27,20 @@ let tablero;
       this.colores.j2 =jsonPiece.color2;
       this.colores.Fondo=jsonPiece.color3;
       this.colores.Borde=jsonPiece.color4;
-     
-               this.n=jsonPiece.n;
+      this.n=jsonPiece.n
               
-             }}
+    }
+            
+            
+            }
     
-      if(ConfigJSON!=null)
+    if(ConfigJSON!=null)
     ficha.import(ConfigJSON)
     
-    
-   createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, ficha.n*2 * Quadrille.CELL_LENGTH);
+    frameRate(60)
+    createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 2*ficha.n * Quadrille.CELL_LENGTH);
     // quadrille object initialization
-
+   
     circulo = ({ cell: cell, cellLength: cellLength }) => {
       noStroke();
       fill(cell);
@@ -48,16 +48,15 @@ let tablero;
       ellipse(0, 0, cellLength, cellLength);
     }
 
-
   Tone.Transport.scheduleRepeat((time) => {
     playMelody(time);
   }, '8n');
 
 
   Tone.Transport.start();
-
+   
     caer = createQuadrille(ficha.n+3,1);
-    tablero = createQuadrille(ficha.n+3,ficha.n+2);
+    tablero = createQuadrille(ficha.n+3, ficha.n+2);
   }
 
   function draw() {
