@@ -7,7 +7,7 @@ let boton;
   let colorDisplay;// quadrille color cell
   let synth ;
   let melodyPlaying = false;
-let numero = int(prompt("Please enter the number of pieces to make the connect N: ", 4);
+let numero;
 
 
   function preload() {
@@ -18,6 +18,7 @@ let numero = int(prompt("Please enter the number of pieces to make the connect N
 
 
    function setup() {
+     numero = parseInt(prompt("Please enter the number of pieces to make the connect N:", 4));
     boton = createCheckbox('musica', false);
   boton.position(10, 10);
   boton.changed(toggleMelody);
