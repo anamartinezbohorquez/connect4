@@ -1,71 +1,65 @@
 let tablero;
 let boton;
-  let caer;
-  let ficha;
-  let turno = 1;
-  let tileDisplay;// (all) quadrille cell contours
-  let colorDisplay;// quadrille color cell
-  let synth ;
-  let melodyPlaying = false;
+let caer;
+let ficha;
+let turno = 1;
+let tileDisplay; // (all) quadrille cell contours
+let colorDisplay; // quadrille color cell
+let synth;
+let melodyPlaying = false;
 let numero;
 
+function preload() {
 
-  function preload() {
-  // loads a previously exported piece
-  
-    ConfigJSON=loadJSON('configo.json');
+  ConfigJSON = loadJSON('configo.json');
 }
 
-
-   function setup() {
-     numero = parseInt(prompt("Please enter the number of pieces to make the connect N:", 4));
-    boton = createCheckbox('musica', false);
+function setup() {
+  numero = parseInt(window.prompt("Please enter the number of pieces to make the connect N:", 4));
+  boton = createCheckbox('musica', false);
   boton.position(10, 10);
   boton.changed(toggleMelody);
 
   synth = new Tone.MembraneSynth({
     oscillator: {
-      type: 'sawtooth' 
+      type: 'sawtooth'
     },
-    volume: -30 
+    volume: -30
   }).toDestination();
-     
-    //Configuraciones de las piezas "Objeto literal"
-    ficha = {position:{x:0,y:0},
-             pieza:color('red'),
-             colores:{j1:'red',j2:'yellow',Fondo:'blue',Borde:'white'},
-             n: numero,
-             import: function (jsonPiece) {
-      this.pieza=color(jsonPiece.color1)
-      this.colores.j1 = jsonPiece.color1;
-      this.colores.j2 =jsonPiece.color2;
-      this.colores.Fondo=jsonPiece.color3;
-      this.colores.Borde=jsonPiece.color4;
-               
-      //this.n=jsonPiece.n
-              
-    }
-            
-            
-            }
-    
-    if(ConfigJSON!=null)
-    ficha.import(ConfigJSON)
-    
-    frameRate(60)
-    createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 2*ficha.n * Quadrille.CELL_LENGTH);
-     
-    // quadrille object initialization
-    circulo = ({ cell: cell, cellLength: cellLength }) => {
-      noStroke();
-      fill(cell);
-      ellipseMode(CORNER);
-      ellipse(0, 0, cellLength, cellLength);
-    }
 
-    caer = createQuadrille(ficha.n+3,1);
-    tablero = createQuadrille(ficha.n+3, ficha.n+2);
-  }
+  // Configuraciones de las piezas "Objeto literal"
+  ficha = {
+    position: { x: 0, y: 0 },
+    pieza: color('red'),
+    colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
+    n: numero,
+    import: function(jsonPiece) {
+      this.pieza = color(jsonPiece.color1);
+      this.colores.j1 = jsonPiece.color1;
+      this.colores.j2 = jsonPiece.color2;
+      this.colores.Fondo = jsonPiece.color3;
+      this.colores.Borde = jsonPiece.color4;
+      //this.n=jsonPiece.n
+    }
+  };
+
+  if (ConfigJSON != null)
+    ficha.import(ConfigJSON);
+
+  frameRate(60);
+  createCanvas(ficha.n * 2 * Quadrille.CELL_LENGTH, 2 * ficha.n * Quadrille.CELL_LENGTH);
+
+  // quadrille object initialization
+  circulo = ({ cell: cell, cellLength: cellLength }) => {
+    noStroke();
+    fill(cell);
+    ellipseMode(CORNER);
+    ellipse(0, 0, cellLength, cellLength);
+  };
+
+  caer = createQuadrille(ficha.n + 3, 1);
+  tablero = createQuadrille(ficha.n + 3, ficha.n + 2);
+}
 
   function draw() {
    
