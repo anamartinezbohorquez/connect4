@@ -1,4 +1,5 @@
 let tablero;
+let boton;
   let caer;
   let ficha;
   let turno = 1;
@@ -16,6 +17,8 @@ let tablero;
 
 
    function setup() {
+     boton = createCheckbox("Music", true);
+     boton.position(10, 10);
      
       synth = new Tone.Synth().toDestination();
     //Configuraciones de las piezas "Objeto literal"
