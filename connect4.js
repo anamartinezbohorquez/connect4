@@ -181,11 +181,7 @@ function ganador() {
 
     if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
       // Player wins
-       if (turno%2 === 0){
-        window.alert(`El jugador ${'ROJO'} gana!`);
-      }else{
-        window.alert(`El jugador ${'AMARILLO'} gana!`);
-      }
+         turno%2==0 ? window.alert("Ganó el Jugador 1"):console.log("Ganó el Jugador 2")
       tablero = createQuadrille(7,6);
       break;
     }
