@@ -17,7 +17,7 @@ let boton;
 
 
    function setup() {
-     boton = createCheckbox("Music", true);
+     boton = createCheckbox("Music", false);
      boton.position(10, 10);
      
       synth = new Tone.Synth().toDestination();
