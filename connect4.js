@@ -6,6 +6,7 @@ let boton;
   let tileDisplay;// (all) quadrille cell contours
   let colorDisplay;// quadrille color cell
   let synth ;
+  let melodyPlaying = false;
 
 
 
@@ -17,10 +18,17 @@ let boton;
 
 
    function setup() {
-     boton = createCheckbox("Music", false);
-     boton.position(10, 10);
+    boton = createCheckbox('musica', false);
+  boton.position(10, 10);
+  boton.changed(toggleMelody);
+
+  synth = new Tone.MembraneSynth({
+    oscillator: {
+      type: 'sawtooth' 
+    },
+    volume: -12 
+  }).toDestination();
      
-      synth = new Tone.Synth().toDestination();
     //Configuraciones de las piezas "Objeto literal"
     ficha = {position:{x:0,y:0},
              pieza:color('red'),
@@ -44,8 +52,8 @@ let boton;
     
     frameRate(60)
     createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 2*ficha.n * Quadrille.CELL_LENGTH);
+     
     // quadrille object initialization
-   
     circulo = ({ cell: cell, cellLength: cellLength }) => {
       noStroke();
       fill(cell);
@@ -53,13 +61,6 @@ let boton;
       ellipse(0, 0, cellLength, cellLength);
     }
 
-  Tone.Transport.scheduleRepeat((time) => {
-    playMelody(time);
-  }, '8n');
-
-
-  // Tone.Transport.start();
-   
     caer = createQuadrille(ficha.n+3,1);
     tablero = createQuadrille(ficha.n+3, ficha.n+2);
   }
@@ -77,12 +78,10 @@ let boton;
                   colorDisplay: circulo,
                  }
 
-       drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:ficha.colores.Borde,
+    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:ficha.colores.Borde,
                        colorDisplay: circulo });
     drawQuadrille(tablero,params);
     
-    boton.checked() ?   Tone.Transport.start();
-
     caer.fill(0,ficha.position.x,ficha.pieza)
     controlador()
   }
@@ -196,11 +195,28 @@ function ganador() {
   }
 }
 
+function toggleMelody() {
+  if (boton.checked()) {
+    melodyPlaying = true;
+    Tone.Transport.scheduleRepeat((time) => {
+      playMelody(time);
+    }, '8n');
+
+    Tone.Transport.start();
+  } else {
+    melodyPlaying = false;
+    Tone.Transport.stop();
+    index = 0;
+  }
+}
+
 const notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
 let index = 0;
 
 function playMelody(time) {
-  let note = notes[index % notes.length];
-  synth.triggerAttackRelease(note, '8n', time);
-  index++;
+  if (melodyPlaying) {
+    let note = notes[index % notes.length];
+    synth.triggerAttackRelease(note, '8n', time);
+    index++;
+  }
 }
