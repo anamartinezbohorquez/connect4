@@ -34,7 +34,7 @@ let numero;
     ficha = {position:{x:0,y:0},
              pieza:color('red'),
              colores:{j1:'red',j2:'yellow',Fondo:'blue',Borde:'white'},
-             n:4,
+             n: numero,
              import: function (jsonPiece) {
       this.pieza=color(jsonPiece.color1)
       this.colores.j1 = jsonPiece.color1;
@@ -43,7 +43,6 @@ let numero;
       this.colores.Borde=jsonPiece.color4;
                
       //this.n=jsonPiece.n
-      this.n = numero
               
     }
             
