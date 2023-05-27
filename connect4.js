@@ -29,7 +29,8 @@ let tablero;
       this.colores.j2 =jsonPiece.color2;
       this.colores.Fondo=jsonPiece.color3;
       this.colores.Borde=jsonPiece.color4;
-      this.n=jsonPiece.n;
+     
+               this.n=jsonPiece.n;
               
              }}
     
