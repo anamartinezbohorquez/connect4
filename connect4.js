@@ -58,7 +58,7 @@ let boton;
   }, '8n');
 
 
-  Tone.Transport.start();
+  // Tone.Transport.start();
    
     caer = createQuadrille(ficha.n+3,1);
     tablero = createQuadrille(ficha.n+3, ficha.n+2);
@@ -80,7 +80,8 @@ let boton;
        drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:ficha.colores.Borde,
                        colorDisplay: circulo });
     drawQuadrille(tablero,params);
-   
+    
+    boton.checked() ?   Tone.Transport.start();
 
     caer.fill(0,ficha.position.x,ficha.pieza)
     controlador()
