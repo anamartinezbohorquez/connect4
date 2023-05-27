@@ -83,7 +83,7 @@ let tablero;
 
   function keyPressed(){
     if(key === 'd'  || key == "ArrowRight"){
-      if(ficha.position.x + 1<7){
+      if(ficha.position.x + 1<ficha.n+3){
         caer.clear(0)
         ficha.position.x += 1
         }
