@@ -95,7 +95,7 @@ let tablero;
         ficha.position.x -= 1
       }
     }
-    if(key === ' '  || key == "ArrowDown"){
+    if(key === ' '  || key == "ArrowDown" || key == "s"){
       if(tablero.isEmpty(0,ficha.position.x)){
         caer.clear(0)
         dro()
