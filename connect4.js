@@ -22,12 +22,12 @@ let tablero;
       ellipse(0, 0, cellLength, cellLength);
     }
 
-    // Start the melody playback
+
   Tone.Transport.scheduleRepeat((time) => {
     playMelody(time);
   }, '8n');
 
-  // Start the Tone.js Transport
+
   Tone.Transport.start();
 
     caer = createQuadrille(7,1);
