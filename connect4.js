@@ -16,6 +16,8 @@ let tablero;
 
 
    function setup() {
+     
+      synth = new Tone.Synth().toDestination();
     //Configuraciones de las piezas "Objeto literal"
     ficha = {position:{x:0,y:0},
              pieza:color('red'),
