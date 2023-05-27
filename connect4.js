@@ -65,7 +65,7 @@ let tablero;
     // to display the quadrille a call to drawQuadrille is needed
 
     let params = {x:50,
-                  y:80,
+                  y:150,
                   outlineWeight:5,
                  
                   outline:ficha.colores.Borde,
