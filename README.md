@@ -1,5 +1,5 @@
 # CONNECT N (Raya en N) - OOP
-Like Connect4 the game, but better
+Like Connect4 the game, but better.
 
 ## Integrantes:
 - Ana Martínez Bohórquez
