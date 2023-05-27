@@ -37,7 +37,7 @@ let tablero;
       if(ConfigJSON!=null)
     ficha.import(ConfigJSON)
     
-   createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 2*ficha.n * Quadrille.CELL_LENGTH);
+   createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, ficha.n*2 * Quadrille.CELL_LENGTH);
     // quadrille object initialization
 
     circulo = ({ cell: cell, cellLength: cellLength }) => {
