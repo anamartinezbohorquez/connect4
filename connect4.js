@@ -37,6 +37,7 @@ let tablero;
       if(ConfigJSON!=null)
     ficha.import(ConfigJSON)
     
+    
    createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, ficha.n*2 * Quadrille.CELL_LENGTH);
     // quadrille object initialization
 
