@@ -26,7 +26,7 @@ let boton;
     oscillator: {
       type: 'sawtooth' 
     },
-    volume: -12 
+    volume: -30 
   }).toDestination();
      
     //Configuraciones de las piezas "Objeto literal"
