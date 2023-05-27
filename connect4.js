@@ -6,11 +6,34 @@ let tablero;
   let colorDisplay;// quadrille color cell
   let synth ;
 
+
+
+  function preload() {
+  // loads a previously exported piece
+  
+    ConfigJSON=loadJSON('configo.json');
+}
+
+
   function setup() {
     //Configuraciones de las piezas "Objeto literal"
     synth = new Tone.Synth().toDestination();
     //Configuraciones de las piezas "Objeto literal"
-    ficha = {position:{x:0,y:0}, pieza:color('red')}
+    ficha = {position:{x:0,y:0},
+             pieza:color('red'),
+             colores:{j1:'red',j2:'yellow',Fondo:'blue',Borde:'white'},
+             import: function (jsonPiece) {
+      this.pieza=color(jsonPiece.color1)
+      this.colores.j1 = jsonPiece.color1;
+      this.colores.j2 =jsonPiece.color2;
+      this.colores.Fondo=jsonPiece.color3;
+      this.colores.Borde=jsonPiece.color4;
+              
+             }}
+    
+      if(ConfigJSON!=null)
+    ficha.import(ConfigJSON)
+    
     frameRate(60)
     createCanvas(8* Quadrille.CELL_LENGTH, 8 * Quadrille.CELL_LENGTH);
     // quadrille object initialization
@@ -35,17 +58,17 @@ let tablero;
   }
 
   function draw() {
-    background('blue');
+    background(pieza.colores.Fondo);
     // to display the quadrille a call to drawQuadrille is needed
 
     let params = {x:50,
                   y:150,
                   outlineWeight:5,
-                  outline:'grey',
+                  outline:pieza.colores.Borde,
                   colorDisplay: circulo,
                  }
 
-    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:'grey',
+    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:pieza.colores.Borde,
                        colorDisplay: circulo });
     drawQuadrille(tablero,params);
 
@@ -54,20 +77,20 @@ let tablero;
   }
 
   function keyPressed(){
-    if(key === 'd'){
+    if(key === 'd'  || key == "ArrowRight"){
       if(ficha.position.x + 1<7){
         caer.clear(0)
         ficha.position.x += 1
         }
     }
 
-    if(key === 'a'){
+    if(key === 'a'  || key == "ArrowLeft"){
       if(ficha.position.x -1 >-1){
         caer.clear(0)
         ficha.position.x -= 1
       }
     }
-    if(key === ' '){
+    if(key === ' '  || key == "ArrowDown"){
       if(tablero.isEmpty(0,ficha.position.x)){
         caer.clear(0)
         dro()
@@ -100,10 +123,10 @@ let tablero;
   }
   function siguiente(turno){
     if (turno%2 === 0){
-      ficha.pieza = color('red');
+      ficha.pieza = color(ficha.colores.j1);
       synth.triggerAttackRelease("C4", "8n");
     }else{
-      ficha.pieza = color('yellow')
+      ficha.pieza = color(ficha.colores.j2)
       synth.triggerAttackRelease("G4", "8n");
     }
   }
@@ -155,11 +178,7 @@ function ganador() {
 
     if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
       // Player wins
-      if (turno%2 === 0){
-        window.alert(`El jugador ${'ROJO'} gana!`);
-      }else{
-        window.alert(`El jugador ${'AMARILLO'} gana!`);
-      }
+     turno%2==0 ? window.alert("Ganó el Jugador 1"):console.log("Ganó el Jugador 2")
       tablero = createQuadrille(7,6);
       break;
     }
