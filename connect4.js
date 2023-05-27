@@ -7,7 +7,7 @@ let boton;
   let colorDisplay;// quadrille color cell
   let synth ;
   let melodyPlaying = false;
-
+let numero = int(prompt("Please enter the number of pieces to make the connect N: ", 4);
 
 
   function preload() {
@@ -42,7 +42,7 @@ let boton;
       this.colores.Borde=jsonPiece.color4;
                
       //this.n=jsonPiece.n
-      this.n = int(prompt("Please enter the number of pieces to make the connect N: ", 4);)
+      this.n = numero
               
     }
             
