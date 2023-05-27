@@ -7,7 +7,7 @@ Like Connect4 the game, but better.
 - Angel David Gomez
 
 ## INTRODUCTION
-We made a HTML, (a bit of) CSS  and JavaScript program that implements a the boardgame of Connect 4.
+We made a program using HTML, (a bit of) CSS  and JavaScript that implements the boardgame of Connect 4.
 
 ## ABOUT THE CODE
 
