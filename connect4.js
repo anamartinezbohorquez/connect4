@@ -37,7 +37,6 @@ let tablero;
       if(ConfigJSON!=null)
     ficha.import(ConfigJSON)
     
-    frameRate(60)
    createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 8*2*ficha.n * Quadrille.CELL_LENGTH);
     // quadrille object initialization
 
@@ -66,7 +65,7 @@ let tablero;
     // to display the quadrille a call to drawQuadrille is needed
 
     let params = {x:50,
-                  y:150,
+                  y:80,
                   outlineWeight:5,
                  
                   outline:ficha.colores.Borde,
