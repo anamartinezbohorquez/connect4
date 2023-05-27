@@ -40,7 +40,9 @@ let boton;
       this.colores.j2 =jsonPiece.color2;
       this.colores.Fondo=jsonPiece.color3;
       this.colores.Borde=jsonPiece.color4;
-      this.n=jsonPiece.n
+               
+      //this.n=jsonPiece.n
+      this.n = int(prompt("Please enter the number of pieces to make the connect N: ", 4);)
               
     }
             
