@@ -58,17 +58,17 @@ let tablero;
   }
 
   function draw() {
-    background(pieza.colores.Fondo);
+    background(ficha.colores.Fondo);
     // to display the quadrille a call to drawQuadrille is needed
 
     let params = {x:50,
                   y:150,
                   outlineWeight:5,
-                  outline:pieza.colores.Borde,
+                  outline:ficha.colores.Borde,
                   colorDisplay: circulo,
                  }
 
-    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:pieza.colores.Borde,
+    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:ficha.colores.Borde,
                        colorDisplay: circulo });
     drawQuadrille(tablero,params);
 
