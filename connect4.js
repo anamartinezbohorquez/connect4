@@ -22,12 +22,14 @@ let tablero;
     ficha = {position:{x:0,y:0},
              pieza:color('red'),
              colores:{j1:'red',j2:'yellow',Fondo:'blue',Borde:'white'},
+             n:4,
              import: function (jsonPiece) {
       this.pieza=color(jsonPiece.color1)
       this.colores.j1 = jsonPiece.color1;
       this.colores.j2 =jsonPiece.color2;
       this.colores.Fondo=jsonPiece.color3;
       this.colores.Borde=jsonPiece.color4;
+      this.n=jsonPiece.n;
               
              }}
     
@@ -35,7 +37,7 @@ let tablero;
     ficha.import(ConfigJSON)
     
     frameRate(60)
-    createCanvas(8* Quadrille.CELL_LENGTH, 8 * Quadrille.CELL_LENGTH);
+   createCanvas(ficha.n*2* Quadrille.CELL_LENGTH, 8*2*ficha.n * Quadrille.CELL_LENGTH);
     // quadrille object initialization
 
     circulo = ({ cell: cell, cellLength: cellLength }) => {
@@ -53,8 +55,8 @@ let tablero;
 
   Tone.Transport.start();
 
-    caer = createQuadrille(7,1);
-    tablero = createQuadrille(7, 6);
+    caer = createQuadrille(ficha.n+3,1);
+    tablero = createQuadrille(ficha.n+3,ficha.n+2);
   }
 
   function draw() {
@@ -108,13 +110,13 @@ let tablero;
     if(ficha.position.x < 0){
       ficha.position.x = 0
     }
-    if(ficha.position.x > 6){
-      ficha.position.x = 6
+    if(ficha.position.x > ficha.n+2){
+      ficha.position.x = ficha.n+2
     }
   }
   function dro(){
     let columna = ficha.position.x
-    for(let fil = 0;fil <6;fil++){
+    for(let fil = 0;fil <ficha.n+2;fil++){
       if(tablero.isEmpty(fil,columna)){
         ficha.position.y=fil
         tablero.fill(fil,columna,ficha.pieza)
@@ -154,7 +156,7 @@ function ganador() {
     l2 = 0,
     l3 = 0,
     l4 = 0;
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i < ficha.n; i++) {
     if (tablero.read(fila + i, colum) != null)
       if (mArray(tablero.read(fila + i, colum).levels, tipo)) l1 += 1;
 
@@ -179,10 +181,10 @@ function ganador() {
     if (tablero.read(fila - i, colum + i) != null)
       if (mArray(tablero.read(fila - i, colum + i).levels, tipo)) l4 += 1;
 
-    if (l1 > 2 || l2 > 2 || l3 > 2 || l4 > 2) {
+    if (l1 > ficha.n-2 || l2 > ficha.n-2 || l3 > ficha.n-2 || l4 > ficha.n-2) {
       // Player wins
          turno%2==0 ? window.alert("Ganó el Jugador 1"):console.log("Ganó el Jugador 2")
-      tablero = createQuadrille(7,6);
+      tablero = createQuadrille(ficha.n+3,ficha.n+2);
       break;
     }
   }
