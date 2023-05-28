@@ -10,7 +10,6 @@ let melodyPlaying = false;
 let numero;
 
 function preload() {
-
   ConfigJSON = loadJSON('configo.json');
 }
 
@@ -39,7 +38,6 @@ function setup() {
       this.colores.j2 = jsonPiece.color2;
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
-      //this.n=jsonPiece.n
     }
   };
 
@@ -56,137 +54,148 @@ function setup() {
     ellipseMode(CORNER);
     ellipse(0, 0, cellLength, cellLength);
   };
-  
 
   caer = createQuadrille(ficha.n + 3, 1);
   tablero = createQuadrille(ficha.n + 3, ficha.n + 2);
 }
 
-  function draw() {
-   
-    background(ficha.colores.Fondo);
-    // to display the quadrille a call to drawQuadrille is needed
+function draw() {
+  background(ficha.colores.Fondo);
+  
+  let params = {
+    x: 50,
+    y: 150,
+    outlineWeight: 5,
+    outline: ficha.colores.Borde,
+    colorDisplay: circulo,
+  };
 
-    let params = {x:50,
-                  y:150,
-                  outlineWeight:5,
-                 
-                  outline:ficha.colores.Borde,
-                  colorDisplay: circulo,
-                 }
+  drawQuadrille(caer, {
+    x: 50,
+    y: 10,
+    outlineWeight: 5,
+    outline: ficha.colores.Borde,
+    colorDisplay: circulo
+  });
+  drawQuadrille(tablero, params);
+  
+  caer.fill(0, ficha.position.x, ficha.pieza);
+  controlador();
+}
 
-    drawQuadrille(caer,{x:50,y:10,outlineWeight:5,outline:ficha.colores.Borde,
-                       colorDisplay: circulo });
-    drawQuadrille(tablero,params);
-    
-    caer.fill(0,ficha.position.x,ficha.pieza)
-    controlador()
-  }
-
-  function keyPressed(){
-    if(key === 'd'  || key == "ArrowRight"){
-      if(ficha.position.x + 1<ficha.n+3){
-        caer.clear(0)
-        ficha.position.x += 1
-        }
+function keyPressed() {
+  if (key === 'd' || key === 'ArrowRight') {
+    if (ficha.position.x + 1 < ficha.n + 3) {
+      caer.clear(0);
+      ficha.position.x += 1;
     }
+  } else if (key === 'a' || key === 'ArrowLeft') {
+    if (ficha.position.x - 1 > -1) {
+      caer.clear(0);
+      ficha.position.x -= 1;
+    }
+  } else if (key === ' ' || key === 'ArrowDown' || key === 's') {
+    if (tablero.isEmpty(0, ficha.position.x)) {
+      caer.clear(0);
+      dro();
+      siguiente(turno);
+      turno += 1;
+      setTimeout(ganador, 50);
+    }
+  }
+}
 
-    if(key === 'a'  || key == "ArrowLeft"){
-      if(ficha.position.x -1 >-1){
-        caer.clear(0)
-        ficha.position.x -= 1
+function controlador() {
+  if (ficha.position.x < 0) {
+    ficha.position.x = 0;
+  } else if (ficha.position.x > ficha.n + 2) {
+    ficha.position.x = ficha.n + 2;
+  }
+}
+
+function dro() {
+  let columna = ficha.position.x;
+  for (let fil = 0; fil < ficha.n + 2; fil++) {
+    if (tablero.isEmpty(fil, columna)) {
+      ficha.position.y = fil;
+      tablero.fill(fil, columna, ficha.pieza);
+      if (fil > 0) {
+        tablero.clear(fil - 1, columna);
       }
     }
-    if(key === ' '  || key == "ArrowDown" || key == "s"){
-      if(tablero.isEmpty(0,ficha.position.x)){
-        caer.clear(0)
-        dro()
-        siguiente(turno)
-        turno+=1
-        setTimeout(ganador,50)
-
-    }
   }
 }
-  function controlador(){
-    if(ficha.position.x < 0){
-      ficha.position.x = 0
-    }
-    if(ficha.position.x > ficha.n+2){
-      ficha.position.x = ficha.n+2
-    }
+
+function siguiente(turno) {
+  if (turno % 2 === 0) {
+    ficha.pieza = color(ficha.colores.j1);
+    synth.triggerAttackRelease("C4", "8n");
+  } else {
+    ficha.pieza = color(ficha.colores.j2);
+    synth.triggerAttackRelease("G4", "8n");
   }
-  function dro(){
-    let columna = ficha.position.x
-    for(let fil = 0;fil <ficha.n+2;fil++){
-      if(tablero.isEmpty(fil,columna)){
-        ficha.position.y=fil
-        tablero.fill(fil,columna,ficha.pieza)
-        if(fil>0){
-          tablero.clear(fil-1,columna);
-        }
-      }
-    }
-  }
-  function siguiente(turno){
-    if (turno%2 === 0){
-      ficha.pieza = color(ficha.colores.j1);
-      synth.triggerAttackRelease("C4", "8n");
-    }else{
-      ficha.pieza = color(ficha.colores.j2)
-      synth.triggerAttackRelease("G4", "8n");
-    }
-  }
-
-
-
-function mArray(a1,a2){
-for (let i = 0; i < a1.length; i++) {
-    if(a1[i]!=a2[i])
-        return false
-}
-    return true
-
 }
 
+function mArray(a1, a2) {
+  for (let i = 0; i < a1.length; i++) {
+    if (a1[i] !== a2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 function ganador() {
-  fila = ficha.position.y;
-  colum = ficha.position.x;
-  tipo = tablero.read(fila, colum).levels;  
-  let l1 = 0,
-    l2 = 0,
-    l3 = 0,
-    l4 = 0;
-  for (i = 1; i < ficha.n; i++) {
-    if (tablero.read(fila + i, colum) != null)
-      if (mArray(tablero.read(fila + i, colum).levels, tipo)) l1 += 1;
-
-    if (tablero.read(fila - i, colum) != null)
-      if (mArray(tablero.read(fila - i, colum).levels, tipo)) l1 += 1;
-
-    if (tablero.read(fila, colum + i) != null)
-      if (mArray(tablero.read(fila, colum + i).levels, tipo)) l2 += 1;
-
-    if (tablero.read(fila, colum - i) != null)
-      if (mArray(tablero.read(fila, colum - i).levels, tipo)) l2 += 1;
-
-    if (tablero.read(fila + i, colum + i) != null)
-      if (mArray(tablero.read(fila + i, colum + i).levels, tipo)) l3 += 1;
-
-    if (tablero.read(fila - i, colum - i) != null)
-      if (mArray(tablero.read(fila - i, colum - i).levels, tipo)) l3 += 1;
-
-    if (tablero.read(fila + i, colum - i) != null)
-      if (mArray(tablero.read(fila + i, colum - i).levels, tipo)) l4 += 1;
-
-    if (tablero.read(fila - i, colum + i) != null)
-      if (mArray(tablero.read(fila - i, colum + i).levels, tipo)) l4 += 1;
-
-    if (l1 > ficha.n-2 || l2 > ficha.n-2 || l3 > ficha.n-2 || l4 > ficha.n-2) {
+  const fila = ficha.position.y;
+  const colum = ficha.position.x;
+  const tipo = tablero.read(fila, colum).levels;
+  let l1 = 0, l2 = 0, l3 = 0, l4 = 0;
+  
+  for (let i = 1; i < ficha.n; i++) {
+    if (tablero.read(fila + i, colum) != null) {
+      if (mArray(tablero.read(fila + i, colum).levels, tipo)) {
+        l1 += 1;
+      }
+    }
+    if (tablero.read(fila - i, colum) != null) {
+      if (mArray(tablero.read(fila - i, colum).levels, tipo)) {
+        l1 += 1;
+      }
+    }
+    if (tablero.read(fila, colum + i) != null) {
+      if (mArray(tablero.read(fila, colum + i).levels, tipo)) {
+        l2 += 1;
+      }
+    }
+    if (tablero.read(fila, colum - i) != null) {
+      if (mArray(tablero.read(fila, colum - i).levels, tipo)) {
+        l2 += 1;
+      }
+    }
+    if (tablero.read(fila + i, colum + i) != null) {
+      if (mArray(tablero.read(fila + i, colum + i).levels, tipo)) {
+        l3 += 1;
+      }
+    }
+    if (tablero.read(fila - i, colum - i) != null) {
+      if (mArray(tablero.read(fila - i, colum - i).levels, tipo)) {
+        l3 += 1;
+      }
+    }
+    if (tablero.read(fila + i, colum - i) != null) {
+      if (mArray(tablero.read(fila + i, colum - i).levels, tipo)) {
+        l4 += 1;
+      }
+    }
+    if (tablero.read(fila - i, colum + i) != null) {
+      if (mArray(tablero.read(fila - i, colum + i).levels, tipo)) {
+        l4 += 1;
+      }
+    }
+    if (l1 > ficha.n - 2 || l2 > ficha.n - 2 || l3 > ficha.n - 2 || l4 > ficha.n - 2) {
       // Player wins
-         turno%2==0 ? window.alert("Ganó el Jugador 1"):window.alert("Ganó el Jugador 2")
-      tablero = createQuadrille(ficha.n+3,ficha.n+2);
+      turno % 2 === 0 ? window.alert("Ganó el Jugador 1") : window.alert("Ganó el Jugador 2");
+      tablero = createQuadrille(ficha.n + 3, ficha.n + 2);
       break;
     }
   }
@@ -197,7 +206,7 @@ function toggleMelody() {
     melodyPlaying = true;
     Tone.Transport.scheduleRepeat((time) => {
       playMelody(time);
-    }, '8n');
+    }, "8n");
 
     Tone.Transport.start();
   } else {
@@ -207,13 +216,13 @@ function toggleMelody() {
   }
 }
 
-let notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
+let notes = ["A3", "D4", "E4", "F5", "D5", "E4", "C4", "D4", "A3", "A3"];
 let index = 0;
 
 function playMelody(time) {
   if (melodyPlaying) {
     let note = notes[index % notes.length];
-    synth.triggerAttackRelease(note, '8n', time);
+    synth.triggerAttackRelease(note, "8n", time);
     index++;
   }
 }
