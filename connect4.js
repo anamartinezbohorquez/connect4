@@ -184,7 +184,7 @@ function ganador() {
 
     if (l1 > ficha.n-2 || l2 > ficha.n-2 || l3 > ficha.n-2 || l4 > ficha.n-2) {
       // Player wins
-         turno%2==0 ? window.alert("Ganó el Jugador 1"):console.log("Ganó el Jugador 2")
+         turno%2==0 ? window.alert("Ganó el Jugador 1"):window.alert("Ganó el Jugador 2")
       tablero = createQuadrille(ficha.n+3,ficha.n+2);
       break;
     }
