@@ -8,6 +8,7 @@ let colorDisplay; // quadrille color cell
 let synth;
 let melodyPlaying = false;
 let numero;
+let notes2;
 
 function preload() {
 
@@ -56,6 +57,10 @@ function setup() {
     ellipseMode(CORNER);
     ellipse(0, 0, cellLength, cellLength);
   };
+  
+   import: function(jsonPiece) {
+      notes2 = jsonPiece.melodia;
+   };
 
   caer = createQuadrille(ficha.n + 3, 1);
   tablero = createQuadrille(ficha.n + 3, ficha.n + 2);
