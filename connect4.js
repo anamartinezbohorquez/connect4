@@ -8,7 +8,6 @@ let colorDisplay; // quadrille color cell
 let synth;
 let melodyPlaying = false;
 let numero;
-let notes2;
 
 function preload() {
 
@@ -42,7 +41,6 @@ function setup() {
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
       //this.n=jsonPiece.n
-      this.cancion = jsonPiece.melodia;
     }
   };
 
