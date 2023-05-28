@@ -31,8 +31,8 @@ function setup() {
   // Configuraciones de las piezas "Objeto literal"
   ficha = {
     position: { x: 0, y: 0 },
-    pieza: color('red'),
     colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
+     pieza: this.colores.j1,
     n: numero,
     import: function(jsonPiece) {
       this.pieza = color(jsonPiece.color1);
@@ -42,6 +42,7 @@ function setup() {
       this.colores.Borde = jsonPiece.color4;
       //this.n=jsonPiece.n
     }
+    
   };
   
 
