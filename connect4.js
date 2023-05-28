@@ -34,6 +34,7 @@ function setup() {
     pieza: color('red'),
     colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
     n: numero,
+    cancion: notes,
     import: function(jsonPiece) {
       this.pieza = color(jsonPiece.color1);
       this.colores.j1 = jsonPiece.color1;
@@ -41,6 +42,7 @@ function setup() {
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
       //this.n=jsonPiece.n
+      this.cancion = jsonPiece.melodia;
     }
   };
 
@@ -58,9 +60,6 @@ function setup() {
     ellipse(0, 0, cellLength, cellLength);
   };
   
-   import: function(jsonPiece) {
-      notes2 = jsonPiece.melodia;
-   };
 
   caer = createQuadrille(ficha.n + 3, 1);
   tablero = createQuadrille(ficha.n + 3, ficha.n + 2);
@@ -211,7 +210,7 @@ function toggleMelody() {
   }
 }
 
-const notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
+let notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
 let index = 0;
 
 function playMelody(time) {
