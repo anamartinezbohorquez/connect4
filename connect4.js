@@ -32,7 +32,7 @@ function setup() {
   ficha = {
     position: { x: 0, y: 0 },
     colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
-     pieza: this.colores.j1,
+     pieza: color(this.colores.j1),
     n: numero,
     import: function(jsonPiece) {
       this.pieza = color(jsonPiece.color1);
