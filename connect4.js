@@ -41,6 +41,8 @@ function setup() {
       //this.n=jsonPiece.n
     }
   };
+  
+  console.log(ficha.notas)
   if (ConfigJSON != null)
     ficha.import(ConfigJSON);
   frameRate(60);
