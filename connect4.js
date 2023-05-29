@@ -36,7 +36,7 @@ function setup() {
       this.colores.j2 = jsonPiece.color2;
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
-      this.notas=jsonPiece.notas
+      this.notas=jsonPiece.notas.split(",")
       this.ritmo=jsonPiece.ritmo
       //this.n=jsonPiece.n
     }
