@@ -29,12 +29,14 @@ function setup() {
     colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
     n: numero,
     notas:[],
+    ritmo:"8n",
     import: function(jsonPiece) {
       this.pieza = color(jsonPiece.color1);
       this.colores.j1 = jsonPiece.color1;
       this.colores.j2 = jsonPiece.color2;
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
+      this.notas=jsonPiece.notas
       //this.n=jsonPiece.n
     }
   };
