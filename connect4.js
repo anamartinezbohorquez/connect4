@@ -191,7 +191,7 @@ console.log(notes)
 
 function playMelody(time) {
   if (melodyPlaying) {
-    let note = ficha.notas[index % ficha.notas.length];
+    let note = notes[index % notes.length];
     synth.triggerAttackRelease(note, ficha.ritmo, time);
     index++;
   }
