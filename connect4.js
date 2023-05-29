@@ -176,7 +176,7 @@ function toggleMelody() {
     melodyPlaying = true;
     Tone.Transport.scheduleRepeat((time) => {
       playMelody(time);
-    }, '8n');
+    }, ficha.ritmo);
     Tone.Transport.start();
   } else {
     melodyPlaying = false;
