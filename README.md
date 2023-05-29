@@ -1,7 +1,8 @@
+# ENGLISH VERSION
 # CONNECT N (Raya en N) - OOP
 Like Connect4 the game, but better.
 
-## Integrantes:
+## MADE BY:
 - Ana Martínez Bohórquez
 - Francisco Jose Gutierrez
 - Angel David Gomez
@@ -19,6 +20,7 @@ turno: Represents the current turn.
 tileDisplay: Holds the display configuration for quadrille cell contours.
 colorDisplay: Holds the display configuration for quadrille color cells.
 synth: Represents a Tone.js synthesizer for generating sounds.
+numero: Represents the n on CONNECT N
 
 ### Setup Function:
 Initializes the Tone.js synthesizer (synth).
@@ -63,6 +65,7 @@ Uses an array of predefined notes and triggers them sequentially.
 
 ## OUTCOMES & CONCLUSIONS
 
+
 ## WHAT WE LEARNT?
 
 
@@ -74,3 +77,5 @@ Uses an array of predefined notes and triggers them sequentially.
 - p5.js library
 - Tone.js library
 - p5.js quadrille library 
+
+# VERSION EN ESPAÑOL
