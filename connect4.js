@@ -47,7 +47,7 @@ function setup() {
     ficha.import(ConfigJSON);
   
   
-  console.log(ficha.notas)
+
   frameRate(60);
   createCanvas(ficha.n * 2 * Quadrille.CELL_LENGTH, 2 * ficha.n * Quadrille.CELL_LENGTH);
   // quadrille object initialization
@@ -186,6 +186,8 @@ function toggleMelody() {
 }
 const notes = ficha.notas;
 let index = 0;
+
+console.log(notes)
 
 function playMelody(time) {
   if (melodyPlaying) {
