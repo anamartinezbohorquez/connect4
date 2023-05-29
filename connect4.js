@@ -179,13 +179,13 @@ function toggleMelody() {
     index = 0;
   }
 }
-const notes = ['A3', 'D4', 'E4', 'F5', 'D5', 'E4', 'C4', 'D4', 'A3', 'A3'];
+const notes = ficha.notas;
 let index = 0;
 
 function playMelody(time) {
   if (melodyPlaying) {
     let note = notes[index % notes.length];
-    synth.triggerAttackRelease(note, '8n', time);
+    synth.triggerAttackRelease(note, ficha.ritmo, time);
     index++;
   }
 }
