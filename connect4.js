@@ -37,6 +37,7 @@ function setup() {
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
       this.notas=jsonPiece.notas
+      this.ritmo=jsonPiece.ritmo
       //this.n=jsonPiece.n
     }
   };
