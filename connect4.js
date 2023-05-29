@@ -184,7 +184,7 @@ function toggleMelody() {
     index = 0;
   }
 }
-const notes = ficha.notas;
+const notes = ["A3", "D4", "E4", "F5", "D5", "E4" ,"C4", "D4", "A3", "A3"];
 let index = 0;
 
 console.log(notes)
