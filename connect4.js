@@ -36,7 +36,7 @@ function setup() {
       this.colores.j2 = jsonPiece.color2;
       this.colores.Fondo = jsonPiece.color3;
       this.colores.Borde = jsonPiece.color4;
-      this.notas=jsonPiece.notas.split(",")
+      this.notas=jsonPiece.notas
       this.ritmo=jsonPiece.ritmo
       //this.n=jsonPiece.n
     }
@@ -184,7 +184,7 @@ function toggleMelody() {
     index = 0;
   }
 }
-const notes = ["A3", "D4", "E4", "F5", "D5", "E4" ,"C4", "D4", "A3", "A3"];
+const notes = ficha.notas.split(",");
 let index = 0;
 
 console.log(notes)
