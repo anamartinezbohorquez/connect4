@@ -28,6 +28,7 @@ function setup() {
     pieza: color('red'),
     colores: { j1: 'red', j2: 'yellow', Fondo: 'blue', Borde: 'white' },
     n: numero,
+    notas:[],
     import: function(jsonPiece) {
       this.pieza = color(jsonPiece.color1);
       this.colores.j1 = jsonPiece.color1;
