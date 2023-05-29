@@ -42,9 +42,12 @@ function setup() {
     }
   };
   
-  console.log(ficha.notas)
+  
   if (ConfigJSON != null)
     ficha.import(ConfigJSON);
+  
+  
+  console.log(ficha.notas)
   frameRate(60);
   createCanvas(ficha.n * 2 * Quadrille.CELL_LENGTH, 2 * ficha.n * Quadrille.CELL_LENGTH);
   // quadrille object initialization
